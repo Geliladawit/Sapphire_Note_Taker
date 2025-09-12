@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
-
+import os
+from utils.gcp_secrets import get_openai_api_key
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -179,8 +180,11 @@ JWT_SETTINGS = {
 AUTH_USER_MODEL = 'authentication.User'
 
 # AI Services Configuration
-OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
+OPENAI_API_KEY = get_openai_api_key(project_id=config('GCP_SECRET_ID', default=''))
+
 GOOGLE_CLOUD_SPEECH_CREDENTIALS_PATH = config('GOOGLE_CLOUD_SPEECH_CREDENTIALS_PATH', default='')
+# Google Cloud Configuration
+GOOGLE_CLOUD_PROJECT = config('GOOGLE_CLOUD_PROJECT', default='')
 
 # Media files configuration
 MEDIA_URL = '/media/'

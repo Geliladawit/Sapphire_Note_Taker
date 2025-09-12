@@ -26,6 +26,10 @@ class NoteProvider extends ChangeNotifier {
     
     try {
       _notes = await _apiService.getNotes(courseId: courseId);
+      // Debug: show filter and list size
+      if (kDebugMode) {
+        print('NoteProvider.loadNotes -> courseId: ' + (courseId?.toString() ?? 'ALL') + ', notes: ' + _notes.length.toString());
+      }
       _error = null;
     } catch (e) {
       _error = _extractErrorMessage(e);

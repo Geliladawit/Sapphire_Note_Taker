@@ -195,6 +195,12 @@ class ApiService {
     }
     
     final response = await _dio.get(url);
+    // Debug: log which endpoint was called and how many notes returned
+    try {
+      print('ApiService.getNotes -> URL: ' + url + ' status: ' + (response.statusCode?.toString() ?? 'null'));
+      final count = (response.data['notes'] as List).length;
+      print('ApiService.getNotes -> items: ' + count.toString());
+    } catch (_) {}
     return (response.data['notes'] as List)
         .map((json) => Note.fromJson(json))
         .toList();

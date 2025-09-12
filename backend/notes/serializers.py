@@ -43,7 +43,7 @@ class NoteListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = (
-            'id', 'title', 'course_title', 'processing_status',
+            'id', 'title', 'course', 'course_title', 'processing_status',
             'is_processed', 'updated_at'
         )
 
