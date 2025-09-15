@@ -189,4 +189,22 @@ class NoteProvider extends ChangeNotifier {
     }
     return error.toString();
   }
-}
+  Future<Note?> getNoteDetails(int noteId) async {                                       
+    try {                                                                               
+     final note = await _apiService.getNote(noteId);                                   
+     final index = _notes.indexWhere((n) => n.id == noteId);                           
+     if (index != -1) {                                                                
+         _notes[index] = note;                                                           
+       } else {                                                                          
+        _notes.add(note);                                                               
+    }                                                                                 
+    notifyListeners();    
+    return note;                                                             
+     } catch (e) {                                                                       
+      _error = _extractErrorMessage(e);                                                 
+       notifyListeners(); 
+       return null;                                                                      
+    }                                                                                   
+   }                                                                                     
+ }
+

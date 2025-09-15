@@ -105,8 +105,8 @@ class _RecordingScreenState extends State<RecordingScreen>
           _transcribedText = result.recognizedWords;
         });
       },
-      listenFor: const Duration(minutes: 5),
-      pauseFor: const Duration(seconds: 3),
+      // listenFor: const Duration(minutes: 5),
+      // pauseFor: const Duration(seconds: 3),
       partialResults: true,
     );
   }

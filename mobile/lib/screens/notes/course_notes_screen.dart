@@ -136,6 +136,7 @@ class _CourseNotesScreenState extends State<CourseNotesScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'course_notes_screen_fab',
         onPressed: () {
           Navigator.push(
             context,

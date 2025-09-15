@@ -205,6 +205,10 @@ class ApiService {
         .map((json) => Note.fromJson(json))
         .toList();
   }
+ Future<Note> getNote(int noteId) async {                                               
+   final response = await _dio.get('/notes/$noteId/');                                  
+   return Note.fromJson(response.data);                                                 
+ }
 
   Future<Note> createNote({
     required String title,

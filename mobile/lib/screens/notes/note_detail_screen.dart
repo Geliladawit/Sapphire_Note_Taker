@@ -33,8 +33,8 @@ class _NoteDetailScreenState extends State<NoteDetailScreen>
     super.dispose();
   }
 
-  void _loadNote() {
-    final note = context.read<NoteProvider>().getNoteById(widget.noteId);
+  void _loadNote() async{
+    final note = await context.read<NoteProvider>().getNoteDetails(widget.noteId);
     setState(() {
       _note = note;
     });

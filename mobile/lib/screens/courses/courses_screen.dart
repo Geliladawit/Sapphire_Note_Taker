@@ -127,6 +127,7 @@ class CoursesScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'courses_screen_fab',
         onPressed: () {
           Navigator.push(
             context,
