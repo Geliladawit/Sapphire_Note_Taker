@@ -102,7 +102,7 @@ def note_detail(request, note_id):
 @permission_classes([IsAuthenticated])
 def reprocess_note(request, note_id):
     """
-    Manually trigger AI reprocessing for a note
+    Manually trigger AI reprocessing for a note and return the updated note
     """
     note = get_object_or_404(Note, id=note_id, user=request.user)
     
@@ -112,9 +112,15 @@ def reprocess_note(request, note_id):
         }, status=status.HTTP_400_BAD_REQUEST)
     
     try:
-        process_note_with_ai(note.id)
+        # Process the note and get the updated note object
+        updated_note = process_note_with_ai(note.id)
+        
+        # Return the updated note data
+        from notes.serializers import NoteSerializer
+        serializer = NoteSerializer(updated_note)
         return Response({
-            'message': 'Note reprocessing started'
+            'message': 'Note reprocessed successfully',
+            'note': serializer.data
         }, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({

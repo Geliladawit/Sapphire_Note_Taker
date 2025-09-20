@@ -33,11 +33,13 @@ class _NoteDetailScreenState extends State<NoteDetailScreen>
     super.dispose();
   }
 
-  void _loadNote() async{
+  Future<void> _loadNote() async {
     final note = await context.read<NoteProvider>().getNoteDetails(widget.noteId);
-    setState(() {
-      _note = note;
-    });
+    if (mounted) {
+      setState(() {
+        _note = note;
+      });
+    }
   }
 
   Future<void> _shareNote() async {
@@ -101,11 +103,17 @@ class _NoteDetailScreenState extends State<NoteDetailScreen>
               } else if (value == 'reprocess') {
                 final success = await context.read<NoteProvider>().reprocessNote(_note!.id);
                 if (success && mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Note reprocessing started'),
-                    ),
-                  );
+                  // Refresh the note to show updated content
+                  await _loadNote();
+                  
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Note reprocessed successfully'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
                 }
               } else if (value == 'delete') {
                 final confirmed = await showDialog<bool>(
