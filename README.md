@@ -13,7 +13,7 @@ An AI-powered note-taking mobile application that transforms spoken content into
 
 ## Architecture
 
-- **Frontend**: Flutter (iOS/Android)
+- **Frontend**: Flutter 
 - **Backend**: Django REST API
 - **Database**: MongoDB
 - **AI Services**: OpenAI API, Google Cloud Speech-to-Text
@@ -36,7 +36,6 @@ sapphire-ai-notetaker/
 - Python 3.9+
 - Flutter SDK
 - MongoDB (local or Atlas)
-- Node.js (for any additional tooling)
 
 ### Backend Setup
 
@@ -102,6 +101,3 @@ sapphire-ai-notetaker/
 3. Make your changes
 4. Submit a pull request
 
-## License
-
-MIT License - see LICENSE file for details
